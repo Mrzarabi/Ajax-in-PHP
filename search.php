@@ -1,24 +1,23 @@
 <?php
 
-$names = ['hadi', 'amo hadi', 'ali'];
+$names = ['haid', 'hadi', 'ali'];
 
+$search = $_GET['search'];
 
-$search_name = $_GET['search'];
+$output = '';
 
-$find = '';
+if(strlen($search) > 0) {
+    foreach($names as $name) {
+        if(strtolower($search) == strtolower(substr($name, 0, strlen($search)))) {
 
-if(strlen($search_name) > 0) {
+            if($output == '') {
 
-    foreach ($names as $name) {
-        if(strtolower($search_name) == strtolower(substr($name, 0, strlen($search_name)))) {
-            
-            if($find == '') {
-                $find = $name;
+                $output = $name;
             } else {
-                $find = $find . ', ' . $name;
+                $output = $name . ', ' . $output;
             }
         }
     }
-}
 
-echo $find;
+    echo $output == '' ? 'no match' : $output;
+}
